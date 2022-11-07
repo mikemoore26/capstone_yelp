@@ -80,7 +80,7 @@ def run(argv=None, save_main_session=True):
 
   # output = lines | 'Format' >> beam.MapTuple(format_result)
 
-  output | 'Write' >> beam.io.WriteToText(known_args.output)
+  lines | 'Write' >> beam.io.WriteToText(known_args.output)
 
     # print(lines)
 #
