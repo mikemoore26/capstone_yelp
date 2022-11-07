@@ -79,8 +79,7 @@ def run(argv=None, save_main_session=True):
     return [x + ':' for x in line]
 
   # output = lines | 'Format' >> beam.MapTuple(format_result)
-
-  lines | 'Write' >> beam.io.WriteToText(known_args.output)
+    lines | 'Write' >> beam.io.WriteToText(known_args.output)
 
     # print(lines)
 #
