@@ -32,7 +32,7 @@ class Json_Csv(beam.DoFn):
         import json
         import csv
         import pandas as pd
-        line = json.loads(line)
+        return json.loads(line)
         # line = pd.Series(line)
 
         #return line
@@ -71,7 +71,6 @@ def run(argv=None, save_main_session=True):
   with beam.Pipeline() as pipeline:
 
     lines = pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
-            | "grouping" >> beam.GroupByKey() \
             | 'Write' >> beam.io.WriteToText(known_args.output)
 
     def format_result(line):
