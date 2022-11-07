@@ -35,7 +35,7 @@ class Json_Csv(beam.DoFn):
         line = json.loads(line)
         # line = pd.Series(line)
 
-        return line
+        #return line
 #
 # def json_csv(line : str) -> beam.pvalue.PCollection:
 #   import json
