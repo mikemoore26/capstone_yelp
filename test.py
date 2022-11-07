@@ -33,15 +33,9 @@ class Json_Csv(beam.DoFn):
         import csv
         import pandas as pd
         line = json.loads(line)
-        series = [pd.Series(line)]
+        series = pd.Series(line)
 
-        # text = ''
-        # for i in range(len(series)):
-        #     text += str(series[i]).strip()
-        #     if i != len(series):
-        #         text += ':'
-
-        return iter(series)
+        return series
 #
 # def json_csv(line : str) -> beam.pvalue.PCollection:
 #   import json
