@@ -41,7 +41,7 @@ class Json_Csv(beam.DoFn):
             if i != len(series):
                 text += ':'
 
-        return lines
+        return text
 #
 # def json_csv(line : str) -> beam.pvalue.PCollection:
 #   import json
