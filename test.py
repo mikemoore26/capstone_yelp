@@ -33,9 +33,9 @@ class Json_Csv(beam.DoFn):
         import csv
         import pandas as pd
         line = json.loads(line)
-        series = pd.Series(line)
+        # line = pd.Series(line)
 
-        return series
+        return line
 #
 # def json_csv(line : str) -> beam.pvalue.PCollection:
 #   import json
@@ -72,7 +72,7 @@ def run(argv=None, save_main_session=True):
 
     lines = pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
             | 'convert method' >> (beam.ParDo(Json_Csv()).with_output_types(str)) \
-            # | beam.FlatMap()
+            | beam.GroupByKey()
 
   def format_result(line):
 
