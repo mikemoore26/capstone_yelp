@@ -18,6 +18,15 @@ filename ='/Users/mikemoore26/Downloads/archive (36)/yelp_academic_dataset_tip.j
 #df = spark.read.json(filename)
 
 
+'''
+python -m /home/michaelrmoore26/mikemm/capstone_yelp/test.py \
+    --region us-west2  \
+    --input gs://yelp_bucket-mm/yelp_academic_dataset_checkin.json \
+    --output gs://yelp_bucket-mm/results/outputs \
+    --runner DataflowRunner \
+    --project algebraic-craft-367518 \
+    --temp_location gs://yelp_bucket-mm/tmp/
+'''
 class Json_Csv(beam.DoFn):
   def json_csv(self,line: str) -> beam.pvalue.PCollection:
     json_csv(line)
