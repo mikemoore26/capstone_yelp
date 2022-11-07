@@ -28,23 +28,35 @@ python -m test \
     --temp_location gs://yelp_bucket-mm/tmp/
 '''
 class Json_Csv(beam.DoFn):
-  def json_csv(self,line: str) -> beam.pvalue.PCollection:
-    json_csv(line)
+    def json_csv(self, line: str) -> beam.pvalue.PCollection:
+        import json
+        import csv
+        import pandas as pd
+        line = json.loads(line)
+        series = [pd.Series(line)]
 
-def json_csv(line : str) -> beam.pvalue.PCollection:
-  import json
-  import csv
-  import pandas as pd
-  line = json.loads(line)
-  series = [pd.Series(line)]
+        text = ''
+        for i in range(len(series)):
+            text += str(series[i]).strip()
+            if i != len(series):
+                text += ':'
 
-  text = ''
-  for i in range(len(series)):
-    text += str(series[i]).strip()
-    if i != len(series):
-      text += ':'
-
-  return lines
+        return lines
+#
+# def json_csv(line : str) -> beam.pvalue.PCollection:
+#   import json
+#   import csv
+#   import pandas as pd
+#   line = json.loads(line)
+#   series = [pd.Series(line)]
+#
+#   text = ''
+#   for i in range(len(series)):
+#     text += str(series[i]).strip()
+#     if i != len(series):
+#       text += ':'
+#
+#   return lines
 
 
 def run(argv=None, save_main_session=True):
@@ -64,7 +76,8 @@ def run(argv=None, save_main_session=True):
 
   with beam.Pipeline() as pipeline:
   # Options
-    print(type(pipeline))
+    #print(type(pipeline))
+  
     lines = pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
             | 'convert method' >> (beam.ParDo(Json_Csv.json_csv()).with_output_types(str)) \
             | beam.Map(print)
