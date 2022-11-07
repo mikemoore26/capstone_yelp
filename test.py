@@ -72,12 +72,11 @@ def run(argv=None, save_main_session=True):
 
     lines = pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
             | 'convert method' >> (beam.ParDo(Json_Csv()).with_output_types(str)) \
-            | beam.GroupByKey() \
+            | "grouping" >> beam.GroupByKey() \
             | 'Write' >> beam.io.WriteToText(known_args.output)
 
-  def format_result(line):
-
-    return [x + ':' for x in line]
+    def format_result(line):
+        return [x + ':' for x in line]
 
   # output = lines | 'Format' >> beam.MapTuple(format_result)
 
