@@ -9,9 +9,9 @@ from apache_beam.options.pipeline_options import PipelineOptions
 from apache_beam.options.pipeline_options import SetupOptions
 from apache_beam.dataframe.convert import to_dataframe
 
-# import findspark
-# findspark.init()
-# from pyspark.sql import SparkSession
+import findspark
+findspark.init()
+from pyspark.sql import SparkSession
 
 filename ='/Users/mikemoore26/Downloads/archive (36)/yelp_academic_dataset_tip.json'
 #spark = SparkSession.builder.master('local').getOrCreate()
@@ -35,13 +35,13 @@ class Json_Csv(beam.DoFn):
         line = json.loads(line)
         series = [pd.Series(line)]
 
-        text = ''
-        for i in range(len(series)):
-            text += str(series[i]).strip()
-            if i != len(series):
-                text += ':'
+        # text = ''
+        # for i in range(len(series)):
+        #     text += str(series[i]).strip()
+        #     if i != len(series):
+        #         text += ':'
 
-        return text
+        return series
 #
 # def json_csv(line : str) -> beam.pvalue.PCollection:
 #   import json
