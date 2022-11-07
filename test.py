@@ -9,9 +9,9 @@ from apache_beam.options.pipeline_options import PipelineOptions
 from apache_beam.options.pipeline_options import SetupOptions
 from apache_beam.dataframe.convert import to_dataframe
 
-import findspark
-findspark.init()
-from pyspark.sql import SparkSession
+# import findspark
+# findspark.init()
+# from pyspark.sql import SparkSession
 
 filename ='/Users/mikemoore26/Downloads/archive (36)/yelp_academic_dataset_tip.json'
 #spark = SparkSession.builder.master('local').getOrCreate()
@@ -19,7 +19,7 @@ filename ='/Users/mikemoore26/Downloads/archive (36)/yelp_academic_dataset_tip.j
 
 
 '''
-python -m /home/michaelrmoore26/mikemm/capstone_yelp/test.py \
+python -m test \
     --region us-west2  \
     --input gs://yelp_bucket-mm/yelp_academic_dataset_checkin.json \
     --output gs://yelp_bucket-mm/results/outputs \
