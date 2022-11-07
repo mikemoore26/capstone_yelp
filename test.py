@@ -65,7 +65,7 @@ def run(argv=None, save_main_session=True):
   with beam.Pipeline() as pipeline:
   # Options
     print(type(pipeline))
-    lines = pipeline | 'reading' >> beam.io.ReadFromText(filename) \
+    lines = pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
             | 'convert method' >> (beam.ParDo(Json_Csv.json_csv()).with_output_types(str)) \
             | beam.Map(print)
 
@@ -78,17 +78,18 @@ def run(argv=None, save_main_session=True):
   output | 'Write' >> WriteToText(known_args.output)
 
     # print(lines)
-
-def run_test():
-  with beam.Pipeline() as pipeline:
-    # Options
-    print(type(pipeline))
-    lines = pipeline | 'reading' >> beam.io.ReadFromText(filename) \
-            | 'convert method' >> beam.Map(json_csv) \
-            | beam.Map(print)
-
-    # df = to_dataframe(lines)
-
-    # print(lines)
+#
+# def run_test():
+#   with beam.Pipeline() as pipeline:
+#     # Options
+#     print(type(pipeline))
+#     lines = pipeline | 'reading' >> beam.io.ReadFromText(filename) \
+#             | 'convert method' >> beam.Map(json_csv) \
+#             | beam.Map(print)
+#
+#     # df = to_dataframe(lines)
+#
+#     # print(lines)
+#
 if __name__ == '__main__':
-  run_test()
+  run
