@@ -19,19 +19,15 @@ filename ='/Users/mikemoore26/Downloads/archive (36)/yelp_academic_dataset_tip.j
 
 def json_csv(line : str) -> beam.pvalue.PCollection:
   import json
+  import csv
   import pandas as pd
-  df = pd.DataFrame()
-  line = dict(json.loads(line))
 
-  for k,v in line.items():
-    print(k,v)
-    df[str(k)] = str(v)
-
-  print(df)
+  line = json.loads(line)
+  series = pd.Series(line)
 
 
 
-  return 'df'
+  return series
 
 def run():
 
@@ -42,6 +38,6 @@ def run():
             | 'convert method' >> beam.Map(json_csv) \
             | beam.Map(print)
 
-    print(lines)
+    # print(lines)
 if __name__ == '__main__':
   run()
