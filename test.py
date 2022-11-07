@@ -75,12 +75,10 @@ def run(argv=None, save_main_session=True):
   known_args, pipeline_args = parser.parse_known_args(argv)
 
   with beam.Pipeline() as pipeline:
-  # Options
-    #print(type(pipeline))
 
     lines = pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
             | 'convert method' >> (beam.ParDo(Json_Csv.json_csv).with_output_types(str)) \
-            | beam.Map(print)
+            | beam.FlatMap()
 
   def format_result(line):
 
