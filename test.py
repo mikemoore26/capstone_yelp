@@ -78,7 +78,7 @@ def run(argv=None, save_main_session=True):
 
     lines = pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
             | 'convert method' >> (beam.ParDo(Json_Csv.json_csv()).with_output_types(str)) \
-            | beam.
+            # | beam.FlatMap()
 
   def format_result(line):
 
