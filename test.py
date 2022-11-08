@@ -74,9 +74,9 @@ def run(argv=None, save_main_session=True):
             | 'Write' >> beam.io.WriteToText(known_args.output)
 
     def format_result(line):
-        return [x + ':' for x in line]
+        return 
 
-  # output = lines | 'Format' >> beam.MapTuple(format_result)
+   #output = lines | 'Format' >> beam.MapTuple(format_result)
 
 
     # print(lines)
