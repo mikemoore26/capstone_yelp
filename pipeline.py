@@ -14,13 +14,13 @@ from apache_beam.dataframe.convert import to_dataframe
 # findspark.init()
 # from pyspark.sql import SparkSession
 
-filename ='/Users/mikemoore26/Downloads/archive (36)/yelp_academic_dataset_tip.json'
+# filename ='/Users/mikemoore26/Downloads/archive (36)/yelp_academic_dataset_tip.json'
 #spark = SparkSession.builder.master('local').getOrCreate()
 #df = spark.read.json(filename)
 
 
 '''
-python -m test \
+python -m pipeline \
     --region us-west2  \
     --input gs://yelp_bucket-mm/yelp_academic_dataset_checkin.json \
     --output gs://yelp_bucket-mm/results/checkin \
@@ -30,13 +30,11 @@ python -m test \
 '''
 class Json_Csv(beam.DoFn):
     def process(self, line):
-        import pandas as pd
-        df = pd.DataFrame([line])
+        data = []
+        for k, v in line.items():
+            data.append((k, v))
 
-    
-    
-        return df
-        
+        yield data        
 #
 # def json_csv(line : str) -> beam.pvalue.PCollection:
 #   import json
@@ -73,9 +71,10 @@ def run(argv=None, save_main_session=True):
   with beam.Pipeline() as pipeline:
 
     lines = pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
-            | 'parse json' >> beam.Map(json.loads) \
-            | 'jsontocsv' >> (beam.ParDo(Json_Csv()).with_input_types(str)) \
-            | 'Write' >> beam.io.WriteToText(known_args.output)
+          | 'parse json' >> beam.Map(json.loads) \
+          | 'transform' >> (beam.ParDo(Json_Csv())) \
+          | 'Grouping' >> beam.GroupByKey() \
+          | 'Write' >> beam.io.Writer(known_args.output))
 
     def format_result(line):
         pass 
