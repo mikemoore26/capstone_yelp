@@ -28,29 +28,17 @@ python -m pipeline \
     --project algebraic-craft-367518 \
     --temp_location gs://yelp_bucket-mm/tmp/
 '''
+
+
 class Json_Csv(beam.DoFn):
     def process(self, line):
+        line = json.loads(line)
         data = []
-        for k, v in line.items():
-            data.append((k, v))
+        for val in line.values():
+            data.append(val)
 
-        yield data        
-#
-# def json_csv(line : str) -> beam.pvalue.PCollection:
-#   import json
-#   import csv
-#   import pandas as pd
-#   line = json.loads(line)
-#   series = [pd.Series(line)]
-#
-#   text = ''
-#   for i in range(len(series)):
-#     text += str(series[i]).strip()
-#     if i != len(series):
-#       text += ':'
-#
-#   return lines
-
+        data = '|'.join(data)
+        yield data 
 
 def run(argv=None, save_main_session=True):
   """Main entry point; defines and runs the wordcount pipeline."""
@@ -70,31 +58,10 @@ def run(argv=None, save_main_session=True):
 
   with beam.Pipeline() as pipeline:
 
-    lines = pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
-          | 'parse json' >> beam.Map(json.loads) \
-          | 'transform' >> (beam.ParDo(Json_Csv())) \
-          | 'Grouping' >> beam.GroupByKey() \
-          | 'Write' >> beam.io.Writer(known_args.output))
+    pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
+          | 'transform' >> beam.ParDo(Json_Csv() ) \
+          | 'Write' >> beam.io.WriteToText(known_args.output)
 
-    def format_result(line):
-        pass 
-
-   #output = lines | 'Format' >> beam.MapTuple(format_result)
-
-
-    # print(lines)
-#
-# def run_test():
-#   with beam.Pipeline() as pipeline:
-#     # Options
-#     print(type(pipeline))
-#     lines = pipeline | 'reading' >> beam.io.ReadFromText(filename) \
-#             | 'convert method' >> beam.Map(json_csv) \
-#             | beam.Map(print)
-#
-#     # df = to_dataframe(lines)
-#
-#     # print(lines)
 #
 if __name__ == '__main__':
   run()
