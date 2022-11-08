@@ -1,5 +1,6 @@
 import argparse
 import logging
+import json
 import re
 
 import apache_beam as beam
@@ -21,21 +22,18 @@ filename ='/Users/mikemoore26/Downloads/archive (36)/yelp_academic_dataset_tip.j
 '''
 python -m test \
     --region us-west2  \
-    --input gs://yelp_bucket-mm/yelp_academic_dataset_checkin.json \
+    --input gs://yelp_bucket-mm/yelp_academic_dataset_tip.json \
     --output gs://yelp_bucket-mm/results/outputs \
     --runner DataflowRunner \
     --project algebraic-craft-367518 \
     --temp_location gs://yelp_bucket-mm/tmp/
 '''
 class Json_Csv(beam.DoFn):
-    def process(self, line: str) -> beam.pvalue.PCollection:
-        import json
-        import csv
-        import pandas as pd
-        return json.loads(line)
-        # line = pd.Series(line)
-
-        #return line
+    def process(self, line):
+    
+    
+        return line.items()
+        
 #
 # def json_csv(line : str) -> beam.pvalue.PCollection:
 #   import json
@@ -61,6 +59,7 @@ def run(argv=None, save_main_session=True):
       dest='input',
       default='gs://yelp_bucket-mm',
       help='Input file to process.')
+      
   parser.add_argument(
       '--output',
       dest='output',
@@ -71,8 +70,7 @@ def run(argv=None, save_main_session=True):
   with beam.Pipeline() as pipeline:
 
     lines = pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
-            | 'convert method' >> (beam.ParDo(Json_Csv()).with_output_types(str)) \
-            | "grouping" >> beam.GroupByKey() \
+            | 'parse json' >> beam.Map(json.loads) \
             | 'Write' >> beam.io.WriteToText(known_args.output)
 
     def format_result(line):
