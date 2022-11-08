@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "algebraic-craft-367518",
+  "private_key_id": "bc557bb20876e636807ebc21d3880a8ad4e0b794",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCJ8QRQVSS8KQTd\n7p6xsKJN3GYEg4wFY/Uec/6W+66RlqfjiakC189bYNM/N53LYfzzoVRL8TjOsm/N\nKgs7ZFue6nh7XI/d7f2UDUahDkLAXNu77hhtKaPZ8Rb4D9bfaGzLd785JaFmtMqQ\n2rWqotZ/1zgCqabM+4lclpvmRQy5OOMa20sTjkM5jRGifWh2LwtP9wjeYL3kof/E\nF7he6a6KbP3uCI7qT0j218cbpA8Cy4yriC+Wlei2rsdbCnnYfXGUCf8+QjArTcD6\nwqwHryQoS6eF1dF6UMtxRVKUdcdbQRxZA0VlPn2vsGvlloPGOVwmJA9kXfiSGiJj\n/oIlIIZlAgMBAAECggEAApkAK0vHLXyaQ7GphGVz+60MW3ESEyHpl6FjPdBPM8es\nsWDCHDRt37soOexgCNiiDQEl7L4wrdfMujDcqvQos4qX1T7jfgWW0mcY7uctWPZc\nCaMiC6A5STKR66mkssACgycQpKYG7upgVtpU3ySXjysW5MScHbJuSPOUdlbTjANf\n/kDm618kpMg+aIiU+UU2+id06cJCJOqCaNJyOAeCX9lBqLA8C9QLKL1PPgwsRfNc\newTG7WEBPq6xbU6J31qd3ix7Ypr1hLSIxoYh+Gqm3jrBOm/UDxxlVyW5SuLM5Rto\nw14SCvKkUSb6Ac+b2nfk9X7QV/8WJat9CerzEb920QKBgQC8r2IrZsUkgCTMB8GC\nb+/UOt92JW2VkpwovtjAtGxIyzjdN7IKmdjEe4QGebq4rRe2+aOtUIYxbudKHa/V\nfByVMzWsumIpadz1HlghQT8iqYbbfNjM5NsruokJXFyl8y1js2TJjAGjNXnwExYS\nd55N8JyMJpT4QqQuqZeMip83qQKBgQC7Jzd4vil3hMdWfJ/cGTjWWD4+kOF6Jh67\nmxuO2d/OoYOss970lrFt86Q88hmIOuHCdrATVjhhb4yOoQez+YqciLieWKim9ZAo\nDOdy+ttTNi2gMZAwQohNbODFaSuIhGWc5eMOol6TGI6tKjgwb3dS7M3UUNBVyVSv\nkreDVteeXQKBgDyq55Ws5ZZm3W380GtwMly60T7bqfB9w1gWhPrxCCAft5jpX4Wp\nEdmbHUg3u6HFhep/OfFwArXCQvvBr9ekoEwYuxlelFFciH8H0q5enD444/OOoObA\nbvgQch9gYym4ls+HztA/BAfGGf7nJCGr9Gp7AtrNTPjF9KRMQz4dFDSBAoGAfZfX\ntgOHOFm2m+eOL9oNNmqJetsnNR2XyjZQzBCSDMx+3MroeCMYdrzmHrApSi6ZijKz\n/oYB2AFPxfdyf+iaiGmH21uL8l8gmn/uYk7OGI1nGPWp2XkMl0jVniTxve97cUsk\nkJGN/hCgzrxicL6cyN15U13YMXmmhxxiYpVIpVECgYB+fiwY0ARu4ZGV5UL1qlIC\nAJbrNLjrQaz1RWNIG28hqGsd6KTBVDcjRMM4GLqY4S6jgdXFCYXrahENI9eTmt3I\n/wekgo8WYDd4KrZPba56y5tE1K9YyUoLgv4MlSWNcpeCcaoqYxd9YTrBJEGC9WXY\ni6la8GK8uYrky4eiMS6ElA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "ps-yelp@algebraic-craft-367518.iam.gserviceaccount.com",
+  "client_id": "105851209174825207552",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ps-yelp%40algebraic-craft-367518.iam.gserviceaccount.com"
+}
