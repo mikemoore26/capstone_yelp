@@ -22,17 +22,20 @@ filename ='/Users/mikemoore26/Downloads/archive (36)/yelp_academic_dataset_tip.j
 '''
 python -m test \
     --region us-west2  \
-    --input gs://yelp_bucket-mm/yelp_academic_dataset_tip.json \
-    --output gs://yelp_bucket-mm/results/outputs \
+    --input gs://yelp_bucket-mm/yelp_academic_dataset_checkin.json \
+    --output gs://yelp_bucket-mm/results/checkin \
     --runner DataflowRunner \
     --project algebraic-craft-367518 \
     --temp_location gs://yelp_bucket-mm/tmp/
 '''
 class Json_Csv(beam.DoFn):
     def process(self, line):
+        import pandas as pd
+        df = pd.DataFrame([line])
+
     
     
-        return line.items()
+        return df
         
 #
 # def json_csv(line : str) -> beam.pvalue.PCollection:
@@ -59,7 +62,7 @@ def run(argv=None, save_main_session=True):
       dest='input',
       default='gs://yelp_bucket-mm',
       help='Input file to process.')
-      
+
   parser.add_argument(
       '--output',
       dest='output',
@@ -71,10 +74,11 @@ def run(argv=None, save_main_session=True):
 
     lines = pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
             | 'parse json' >> beam.Map(json.loads) \
+            | 'jsontocsv' >> (beam.ParDo(Json_Csv()).with_input_types(str)) \
             | 'Write' >> beam.io.WriteToText(known_args.output)
 
     def format_result(line):
-        return 
+        pass 
 
    #output = lines | 'Format' >> beam.MapTuple(format_result)
 
