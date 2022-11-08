@@ -30,9 +30,11 @@ python -m test \
 '''
 class Json_Csv(beam.DoFn):
     def process(self, line):
-    
-    
-        return line.items()
+        data = []
+        for k, v in line.items():
+            data.append((k, v))
+
+        yield data
         
 #
 # def json_csv(line : str) -> beam.pvalue.PCollection:
@@ -69,9 +71,11 @@ def run(argv=None, save_main_session=True):
 
   with beam.Pipeline() as pipeline:
 
-    lines = pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
-            | 'parse json' >> beam.Map(json.loads) \
-            | 'Write' >> beam.io.WriteToText(known_args.output)
+    lines = pipeline | 'reading' >> beam.io.ReadFromText(filename) \
+          | 'parse json' >> beam.Map(json.loads) \
+          | 'transform' >> (beam.ParDo(Json_Csv())) \
+          | 'Grouping' >> beam.GroupByKey() \
+          | 'Write' >> beam.Map(print)
 
     def format_result(line):
         return 
