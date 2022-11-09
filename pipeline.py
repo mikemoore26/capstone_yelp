@@ -35,7 +35,7 @@ class Json_Csv(beam.DoFn):
         line = json.loads(line)
         data = []
         for val in line.values():
-            data.append(val)
+            data.append(str(val))
 
         data = '|'.join(data)
         yield data 
@@ -61,7 +61,14 @@ def run(argv=None, save_main_session=True):
     pipeline | 'reading' >> beam.io.ReadFromText(known_args.input) \
           | 'transform' >> beam.ParDo(Json_Csv() ) \
           | 'Write' >> beam.io.WriteToText(known_args.output)
+          
+""" 
+TODO
+Learn how to send in column name with value correctly 
+Connect to BigQuery
+Insert into BigQuery, delimitor is '|'
+"""
 
-#
+
 if __name__ == '__main__':
   run()
