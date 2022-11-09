@@ -16,7 +16,7 @@ python -m pipeline  \
 --temp_location gs://yelp_bucket-mm/tmp/
 
 python -m pipeline \
---region us-west2
+--region us-west2 \
 --input gs://yelp_bucket-mm/yelp_academic_dataset_user.json \
 --output gs://yelp_bucket-mm/results/user \
 --runner DataflowRunner \
